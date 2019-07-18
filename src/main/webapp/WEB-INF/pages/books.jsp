@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="java.util.*"%>
 <%@page import="com.bookmanagement.spring.model.Book"%>
 <!DOCTYPE html>
@@ -16,32 +17,29 @@
 			&nbsp;&nbsp;&nbsp; 
 			<a href="books">List All Books</a>
 		</h2>
-		<table border="1" cellpadding="5">
-			<caption>
-				<h2>List of Users</h2>
-			</caption>
+		<h2 style="margin-top: 20px">
+				List of Users
+		</h2>
+		<table border="1">
 			<tr>
 				<th>No</th>
 				<th>Name</th>
 				<th>Category</th>
 				<th>Author</th>
 				<th>Actions</th>
-			</tr>
-			<% 
-            List<Book> bookList = (List<Book>)request.getAttribute("listBooks");
-            int index = 0;
-        	for(Book book : bookList){%>
+			</tr>			
+        	<c:forEach items="${listBooks}" var="book"> 
 			<tr>
-				<td><%=index%></td>
-				<td><%=book.get_bookName()%></td>
-				<td><%=book.get_category().get_categName()%></td>
-				<td><%=book.getAuthorNames()%></td>
+				<td>${book._bookId}</td>
+				<td>${book._bookName}</td>
+				<td>${book._category._categName}</td>
+				<td>${book.getAuthorNames()}</td>
 				<td>
-					<a href="book-edit?id=<%=book.get_bookId()%>">Edit</a>
+					<a href="book-edit?id=${book._bookId}">Edit</a>
 					&nbsp;&nbsp;&nbsp;&nbsp; 
-					<a href="book-remove/<%=book.get_bookId()%>">Delete</a></td>
+					<a href="book-remove/${book._bookId}">Delete</a></td>
 			</tr>
-			<% index ++;}%>
+			</c:forEach>
 		</table>
 	</div>
 

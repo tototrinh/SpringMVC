@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="com.bookmanagement.spring.model.*"%>
 <!DOCTYPE html>
 <html>
@@ -9,7 +9,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<% Book book = (Book)request.getAttribute("book");%>
 	<div align="center">
 		<h1>User Management</h1>
 		<h2>
@@ -18,20 +17,19 @@
 			<a href="books">List All Books</a>
 		</h2>
 		<form action="book-save" method="post">
-			<table border="1" cellpadding="5">
+			<table border="1">
 				<caption>
-					<h2>
-						<c:choose>
-							<c:when test="${book != null}">
-						        Edit Book
-						        <br />
-							</c:when>
-							<c:otherwise>
-						        Add New Book
-						        <br />
-							</c:otherwise>
-						</c:choose>
-					</h2>
+					<c:choose>
+						<c:when test="${book != null}">
+							<h2>Edit Book</h2>
+							<br />
+						</c:when>
+						<c:otherwise>
+							<h2>Add New Book</h2>
+							<br />
+						</c:otherwise>
+					</c:choose>
+
 				</caption>
 				<c:if test="${book != null}">
 					<input type="hidden" name="id" value="${book.get_bookId()}" />

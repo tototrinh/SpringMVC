@@ -7,13 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<center>
+	<div align="center">
   		<h1>Book Management</h1>
         <h2>
          <a href="book-new">Add New Book</a>
          &nbsp;&nbsp;&nbsp;
          <a href="books">List All Books</a>
         </h2>
- 	</center>
+ 	</div>
 </body>
 </html>
