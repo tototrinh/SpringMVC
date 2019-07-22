@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class BookController {
@@ -32,21 +31,20 @@ public class BookController {
 	}
 
 	@RequestMapping(value = "/books", method = RequestMethod.GET)
-	public ModelAndView listBooks(Model model) {
-		model.addAttribute("book", new Book());
+	public String listBooks(Model model) {
 		model.addAttribute("listBooks", this.bookService.listBooks());
-		return new ModelAndView("books");
+		return "books";
 	}
 
 	@RequestMapping(value = "/book-new", method = RequestMethod.GET)
-	public ModelAndView sendToNewForm() {
-		return new ModelAndView("book");
+	public String sendToNewForm() {
+		return "book";
 	}
 
 	@RequestMapping(value = "/book-edit", method = RequestMethod.GET)
-	public ModelAndView sendToEditForm(@RequestParam("id") int id, Model model) {
+	public String sendToEditForm(@RequestParam("id") int id, Model model) {
 		model.addAttribute("book", this.bookService.getBookById(id));
-		return new ModelAndView("book");
+		return "book";
 	}
 
 	@PostMapping(value = "/book-save")
@@ -68,9 +66,7 @@ public class BookController {
 			this.bookService.addBook(book);
 		} else {
 			Book book = new Book(new Integer(id), name, category, authors);
-			System.out.print(id);
 			this.bookService.updateBook(book);
-			System.out.print(id);
 		}
 		return "redirect:/books";
 	}
