@@ -14,63 +14,61 @@ public class Book {
 	}
 
 	public Book(String name, Category category, Set<Author> authors) {
-		super();
-		this._bookName = name;
-		this._authors = authors;
-		this._category = category;
+		_bookName = name;
+		_authors = authors;
+		_category = category;
 	}
 
 	public Book(String name, Category category, Author... authors) {
-		this._bookName = name;
-		this._authors = Stream.of(authors).collect(Collectors.toSet());
-		this._authors.forEach(x -> x.get_books().add(this));
-		this._category = category;
+		_bookName = name;
+		_authors = Stream.of(authors).collect(Collectors.toSet());
+		_authors.forEach(x -> x.getBooks().add(this));
+		_category = category;
 	}
 
 	public Book(int id, String name, Category category, Set<Author> authors) {
-		super();
-		this._bookId = id;
-		this._bookName = name;
-		this._category = category;
-		this._authors = authors;
+		_bookId = id;
+		_bookName = name;
+		_category = category;
+		_authors = authors;
 	}
 
-	public int get_bookId() {
+	public int getBookId() {
 		return _bookId;
 	}
 
-	public void set_bookId(int _bookId) {
-		this._bookId = _bookId;
+	public void setBookId(int bookId) {
+		_bookId = bookId;
 	}
 
-	public String get_bookName() {
+	public String getBookName() {
 		return _bookName;
 	}
 
-	public void set_bookName(String _bookName) {
-		this._bookName = _bookName;
+	public void setBookName(String bookName) {
+		_bookName = bookName;
 	}
 
-	public Category get_category() {
+	public Category getCategory() {
 		return _category;
 	}
 
-	public void set_category(Category _category) {
-		this._category = _category;
+	public void setCategory(Category category) {
+		_category = category;
 	}
 
-	public Set<Author> get_authors() {
+	public Set<Author> getAuthors() {
 		return _authors;
 	}
 
-	public void set_authors(Set<Author> _authors) {
-		this._authors = _authors;
+	public void setAuthors(Set<Author> authors) {
+		_authors = authors;
 	}
 
 	public String getAuthorNames() {
 		String names = "";
 		for (Author author : this._authors) {
-			names += author.get_authName() + ", ";
+			names += author.getAuthName() + ", ";
 		}
 		return names.substring(0, names.length() - 2);
 	}

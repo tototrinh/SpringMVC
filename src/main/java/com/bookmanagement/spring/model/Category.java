@@ -14,45 +14,42 @@ public class Category {
 	}
 
 	public Category(String name) {
-		super();
-		this._categName = name;
+		_categName = name;
 	}
 
 	public Category(int id, String name) {
-		super();
-		this._categId = id;
-		this._categName = name;
+		_categId = id;
+		_categName = name;
 	}
 
 	public Category(String name, Book... books) {
-		super();
-		this._categName = name;
-		this._books = Stream.of(books).collect(Collectors.toSet());
-		this._books.forEach(x -> x.set_category(this));
+		_categName = name;
+		_books = Stream.of(books).collect(Collectors.toSet());
+		_books.forEach(x -> x.setCategory(this));
 	}
 
-	public int get_categId() {
+	public int getCategId() {
 		return _categId;
 	}
 
-	public void set_categId(int _categId) {
-		this._categId = _categId;
+	public void setCategId(int categId) {
+		_categId = categId;
 	}
 
-	public String get_categName() {
+	public String getCategName() {
 		return _categName;
 	}
 
-	public void set_categName(String _categName) {
-		this._categName = _categName;
+	public void setCategName(String categName) {
+		_categName = categName;
 	}
 
-	public Set<Book> get_books() {
+	public Set<Book> getBooks() {
 		return _books;
 	}
 
-	public void set_books(Set<Book> _books) {
-		this._books = _books;
+	public void setBooks(Set<Book> books) {
+		_books = books;
 	}
 
 	@Id
