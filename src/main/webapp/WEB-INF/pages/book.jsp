@@ -20,7 +20,7 @@
 			<table border="1">
 				<caption>
 					<c:choose>
-						<c:when test="${book != null}">
+						<c:when test="${not empty book}">
 							<h2>Edit Book</h2>
 							<br />
 						</c:when>
@@ -31,23 +31,23 @@
 					</c:choose>
 
 				</caption>
-				<c:if test="${book != null}">
-					<input type="hidden" name="id" value="${book.get_bookId()}" />
+				<c:if test="${not empty book}">
+					<input type="hidden" name="id" value="${book.bookId}" />
 				</c:if>
 				<tr>
 					<th>Book Name:</th>
 					<td><input type="text" name="name" size="45"
-						value="${book.get_bookName()}" /></td>
+						value="${book.bookName}" /></td>
 				</tr>
 				<tr>
 					<th>Category:</th>
 					<td><input type="text" name="category" size="45"
-						value="${book.get_category().get_categName()}" /></td>
+						value="${book.category.categName}" /></td>
 				</tr>
 				<tr>
 					<th>Author:</th>
 					<td><input type="text" name="author" size="45"
-						value="${book.getAuthorNames()}" /></td>
+						value="${book.authorNames}" /></td>
 				</tr>
 			</table>
 			<input type="submit" value="Save" />
