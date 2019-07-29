@@ -27,12 +27,12 @@ public class BookController {
 	@Autowired(required = true)
 	@Qualifier(value = "bookService")
 	public void setBookService(BookService bookService) {
-		this.bookService = bookService;
+		_bookService = bookService;
 	}
 
 	@RequestMapping(value = "/books", method = RequestMethod.GET)
 	public String listBooks(Model model) {
-		model.addAttribute("listBooks", this.bookService.listBooks());
+		model.addAttribute("listBooks", _bookService.listBooks());
 		return "books";
 	}
 
@@ -43,14 +43,14 @@ public class BookController {
 
 	@RequestMapping(value = "/book-edit", method = RequestMethod.GET)
 	public String sendToEditForm(@RequestParam("id") int id, Model model) {
-		model.addAttribute("book", this.bookService.getBookById(id));
+		model.addAttribute("book", _bookService.getBookById(id));
 		return "book";
 	}
 
 	@PostMapping(value = "/book-save")
 	public String addBook(@RequestParam(value = "id", required = false, defaultValue = "-1") int id,
-			@RequestParam("name") String name, @RequestParam("category") String categoryName,
-			@RequestParam("author") String authorList) {
+		@RequestParam("name") String name, @RequestParam("category") String categoryName,
+		@RequestParam("author") String authorList) {
 
 		List<String> authorNames = new ArrayList<String>(Arrays.asList(authorList.split(", ")));
 
@@ -63,10 +63,11 @@ public class BookController {
 		Category category = new Category(categoryName);
 		if (id < 0) {
 			Book book = new Book(name, category, authors);
-			this.bookService.addBook(book);
-		} else {
+			_bookService.addBook(book);
+		}
+		else {
 			Book book = new Book(new Integer(id), name, category, authors);
-			this.bookService.updateBook(book);
+			_bookService.updateBook(book);
 		}
 		return "redirect:/books";
 	}
@@ -74,9 +75,9 @@ public class BookController {
 	@RequestMapping("/book-remove/{id}")
 	public String removeBook(@PathVariable("id") int id) {
 
-		this.bookService.removeBook(id);
+		_bookService.removeBook(id);
 		return "redirect:/books";
 	}
 
-	private BookService bookService;
+	private BookService _bookService;
 }
