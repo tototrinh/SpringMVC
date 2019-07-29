@@ -28,14 +28,15 @@
 			</tr>			
         	<c:forEach items="${listBooks}" var="book"> 
 			<tr>
-				<td>${book._bookId}</td>
-				<td>${book._bookName}</td>
-				<td>${book._category._categName}</td>
+				<td>${book.bookId}</td>
+				<td>${book.bookName}</td>
+				<td>${book.category.categName}</td>
 				<td>${book.getAuthorNames()}</td>
 				<td>
-					<a href="book-edit?id=${book._bookId}">Edit</a>
+					<a href="book-edit?id=${book.bookId}">Edit</a>
 					&nbsp;&nbsp;&nbsp;&nbsp; 
-					<a href="book-remove/${book._bookId}">Delete</a></td>
+					<a href="book-remove/${book.bookId}">Delete</a>
+				</td>
 			</tr>
 			</c:forEach>
 		</table>
