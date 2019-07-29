@@ -12,39 +12,37 @@ public class Author {
 	}
 
 	public Author(String name) {
-		super();
-		this._authName = name;
+		_authName = name;
 
 	}
 
 	public Author(int id, String name) {
-		super();
-		this._authId = id;
-		this._authName = name;
+		_authId = id;
+		_authName = name;
 	}
 
-	public int get_authId() {
+	public int getAuthId() {
 		return _authId;
 	}
 
-	public void set_authId(int _authId) {
-		this._authId = _authId;
+	public void setAuthId(int authId) {
+		_authId = authId;
 	}
 
-	public String get_authName() {
+	public String getAuthName() {
 		return _authName;
 	}
 
-	public void set_authName(String _authName) {
-		this._authName = _authName;
+	public void setAuthName(String authName) {
+		_authName = authName;
 	}
 
-	public Set<Book> get_books() {
+	public Set<Book> getBooks() {
 		return _books;
 	}
 
-	public void set_books(Set<Book> _books) {
-		this._books = _books;
+	public void setBooks(Set<Book> books) {
+		_books = books;
 	}
 
 	@Id
