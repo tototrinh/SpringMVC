@@ -4,14 +4,14 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
       http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="myDataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName"
-			value="com.mysql.jdbc.Driver" />
-		<property name="url"
-			value="jdbc:mysql://localhost:3306/hibernateDB?useSSL=false" />
-		<property name="username" value="to" />
-		<property name="password" value="Thien123!" />
+	<bean class="java.net.URI" id="dbUrl">
+		<constructor-arg value="#{systemEnvironment['DATABASE_URL']}"/>
+	</bean>
+	<bean id="myDataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="#{ 'jdbc:postgresql://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() + '?sslmode=require' }"/>
+		<property name="username" value="#{ @dbUrl.getUserInfo().split(':')[0] }"/>
+		<property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }"/>
 	</bean>
 
 	<bean id="mySessionFactory"
@@ -28,7 +28,7 @@
 
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">create</prop>
 			</props>
